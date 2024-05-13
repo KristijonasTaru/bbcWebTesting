@@ -1,0 +1,21 @@
+{
+  "name": "bbcwebpagetesting",
+  "version": "1.0.0",
+  "description": "bbc_webpage_testing",
+  "main": "index.js",
+  "scripts": {
+    "triggerAllTest": "npx cypress run",
+    "openCypress": "npx cypress open",
+    "cypressChromeEdge": "npm run triggerAllTest -- --browser chrome & npm run triggerAllTest -- --browser edge",
+    "cypressFirefox": "npm run triggerAllTest -- --browser firefox --headed",
+    "deleteAllScreenshots": "rm -rf cypress/screenshots/*"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^13.8.1",
+    "cypress-real-events": "^1.12.0",
+    "dotenv": "^16.4.5",
+    "npx": "^10.2.2"
+  }
+}
