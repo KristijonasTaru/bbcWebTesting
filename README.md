@@ -4,6 +4,17 @@
 ## Description of the project
 This project is focused to automate test cases for https://www.bbc.com/. All automation test were done with Cypress 
 
+## Test cases for
+1. BBC article
+2. BBC home page navigation
+3. BBC registration page (invalid registration)
+4. BBC responsive design
+5. BBC search functionality
+6. BBC video player
+7. BBC in different languages
+8. BBC news letter subscription
+##
+
 ## Installation
 
 *Follow these steps to clone the repository:*
@@ -16,7 +27,19 @@ This project is focused to automate test cases for https://www.bbc.com/. All aut
 6. Type git clone, and then paste the URL you copied earlier.
 ##
 
-**Install Dependencies**: Navigate to the project directory and install dependencies using npm: npm install (also could be installed with yarn)
+**Install Dependencies**: Navigate to the project directory and install dependencies using npm: 
+```
+npm install
+```
+(also could be installed with yarn following dependencies will be shown with npm)
+
+```
+npm i cypress
+```
+
+```
+npm i npx
+```
 
 
 ## How To Run Tests

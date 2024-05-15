@@ -4,7 +4,6 @@ import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-
 import { subscriptionLocators } from "../../support/pageObject/subscription-service/subscription-service-locators";
 
 describe("Verify that the Newsletter Subscription works.", () => {
-
   beforeEach(() => {
     MainFunctions.beforeEachRoutine();
   });
@@ -26,9 +25,7 @@ describe("Verify that the Newsletter Subscription works.", () => {
     MainFunctions.assertTitle("account overview");
     cy.get(subscriptionLocators.FOOTER_SUBSCRIBE).click();
     cy.get(subscriptionLocators.SUBSCRIBE_SIGN_IN).click();
-    cy.get(subscriptionLocators.CONFIRM_SUBSCRIPTION, {
-      timeout: 5000,
-    }).click();
+    cy.get(subscriptionLocators.CONFIRM_SUBSCRIPTION).click();
     cy.get(subscriptionLocators.SUCCESS_MESSAGE).contains(
       "Thank you! You've subscribed and should"
     );

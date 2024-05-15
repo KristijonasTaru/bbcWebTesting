@@ -8,14 +8,24 @@
     "openCypress": "npx cypress open",
     "cypressChromeEdge": "npm run triggerAllTest -- --browser chrome & npm run triggerAllTest -- --browser edge",
     "cypressFirefox": "npm run triggerAllTest -- --browser firefox --headed",
-    "deleteAllScreenshots": "rm -rf cypress/screenshots/*"
+    "deleteAllScreenshots": "rm -rf cypress/screenshots/*",
+
+    "runArticleViewing": "npx cypress run --spec cypress/e2e/bbc-article-viewing/*",
+    "runHomeNavigation": "npx cypress run --spec cypress/e2e/bbc-home-navigation/*",
+    "runRegistrationPage": "npx cypress run --spec cypress/e2e/bbc-registration-page/*",
+    "runResponsiveDesign": "npx cypress run --spec cypress/e2e/bbc-responsive-design/*",
+    "runSearchFunctionality": "npx cypress run --spec cypress/e2e/bbc-search-functionality/*",
+    "runVideoPlayer": "npx cypress run --spec cypress/e2e/bbc-video-player/*",
+    "runLanguageSelection": "npx cypress run --spec cypress/e2e/language-selection/*",
+    "runSubscriptionService": "npx cypress run --spec cypress/e2e/subscription-service/*"
   },
-  "author": "",
+  "author": "Kristijonas",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "cypress": "^13.8.1",
     "cypress-real-events": "^1.12.0",
     "dotenv": "^16.4.5",
-    "npx": "^10.2.2"
+    "npx": "^3.0.0"
   }
 }
