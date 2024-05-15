@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { homeLocators } from "../../support/pageObject/locators/bbc-home-navigation-locators/home-navigation-locators";
-import { subscriptionLocators } from "../../support/pageObject/locators/subscription-service-locators/subscription-service-locators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
+import { subscriptionLocators } from "../../support/pageObject/subscription-service/subscription-service-locators";
 
 describe("Verify that the Newsletter Subscription works.", () => {
   const mainFunctions = new MainFunctions();

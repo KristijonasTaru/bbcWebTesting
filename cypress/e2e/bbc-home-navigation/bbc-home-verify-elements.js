@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { homeLocators } from "../../support/pageObject/locators/bbc-home-navigation-locators/home-navigation-locators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify that the informational navigation links in the footer load the correct pages.", () => {
   const mainFunctions = new MainFunctions();

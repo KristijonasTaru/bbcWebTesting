@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { homeLocators } from "../../support/pageObject/locators/bbc-home-navigation-locators/home-navigation-locators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify Homepage Navigation in navbar works as expected", () => {
   const mainFunctions = new MainFunctions();
@@ -10,14 +10,7 @@ describe("Verify Homepage Navigation in navbar works as expected", () => {
   });
 
   it("Verify that BBC.com homepage loaded", () => {
-    cy.intercept("GET", "https://www.bbc.com/", (req) => {
-      console.log("page:", req);
-    }).as("bbc");
-    cy.visit("/");
-    cy.wait("@bbc").then((interception) => {
-      expect(interception.response.statusCode).to.equal(200);
-    });
-    cy.title().should("include", "BBC Home");
+    mainFunctions.bbcHomePageCorrectlyLoaded()
   });
 
   it("Verify that navigation link News in the navigation bar load the correct pages.", () => {

@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { homeLocators } from "../../support/pageObject/locators/bbc-home-navigation-locators/home-navigation-locators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify Homepage Navigation in footer main links works as expected", () => {
   const mainFunctions = new MainFunctions();
@@ -10,12 +10,7 @@ describe("Verify Homepage Navigation in footer main links works as expected", ()
   });
 
   it("Verify that BBC.com homepage loaded", () => {
-    cy.intercept("GET", "https://www.bbc.com/").as("bbc");
-    cy.visit("/");
-    cy.wait("@bbc").then((interception) => {
-      expect(interception.response.statusCode).to.equal(200);
-    });
-    cy.title().should("include", "BBC Home");
+    mainFunctions.bbcHomePageCorrectlyLoaded()
   });
 
   it("Verify that footer link Home in the footer bar load the correct pages.", () => {
@@ -23,7 +18,7 @@ describe("Verify Homepage Navigation in footer main links works as expected", ()
     mainFunctions.assertURL("/");
   });
 
-  it("Verify that footer link Live in the footer bar load the correct pages.", () => {
+  it("Verify that footer link News in the footer bar load the correct pages.", () => {
     mainFunctions.clickLink(homeLocators.LINKS_FOOTER_MAIN, "News");
     mainFunctions.assertURL("/news");
   });
@@ -33,7 +28,7 @@ describe("Verify Homepage Navigation in footer main links works as expected", ()
     mainFunctions.assertURL("/sport");
   });
 
-  it("Verify that footer link Live in the footer bar load the correct pages.", () => {
+  it("Verify that footer link Business in the footer bar load the correct pages.", () => {
     mainFunctions.clickLink(homeLocators.LINKS_FOOTER_MAIN, "Business");
     mainFunctions.assertURL("/business");
   });
@@ -62,7 +57,7 @@ describe("Verify Homepage Navigation in footer main links works as expected", ()
     mainFunctions.assertURL("/video");
   });
 
-  it("Verify that footer link Audio in the footer bar load the correct pages.", () => {
+  it("Verify that footer link Live in the footer bar load the correct pages.", () => {
     mainFunctions.clickLink(homeLocators.LINKS_FOOTER_MAIN, "Live");
     mainFunctions.assertURL("/live");
   });

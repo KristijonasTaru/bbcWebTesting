@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { otherLanguagesLocators } from "../../support/pageObject/locators/bbc-other-languages/bbc-in-other-languages-locators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import { otherLanguagesLocators } from "../../support/pageObject/bbc-other-languages/bbc-in-other-languages-locators";
 
 describe("Verify that users can select different BBC region from the BBC in Portugal, Turkish and Yoruba languages menu.", () => {
   const mainFunctions = new MainFunctions();
@@ -19,11 +19,6 @@ describe("Verify that users can select different BBC region from the BBC in Port
     mainFunctions.assertTitle(
       "Notícias, vídeos, análise e contexto em português"
     );
-
-    // cy.title().should(
-    //   "include",
-    //   "Notícias, vídeos, análise e contexto em português"
-    // );
   });
 
   it("Verify that BBC websites of Turkish region opens from footer", () => {

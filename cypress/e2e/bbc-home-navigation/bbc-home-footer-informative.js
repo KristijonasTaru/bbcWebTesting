@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { homeLocators } from "../../support/pageObject/locators/bbc-home-navigation-locators/home-navigation-locators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import { mainFunctionLocators } from "../../support/pageObject/main-function/main-function-locators";
+import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify that the informational navigation links in the footer load the correct pages.", () => {
   const mainFunctions = new MainFunctions();
@@ -62,17 +63,25 @@ describe("Verify that the informational navigation links in the footer load the 
   });
 
   it("Verify that footer informative link Do not share or sell my info in the footer bar load the correct pages.", () => {
-    cy.get(homeLocators.LINKS_FOOTER_INFORMATIVE)
-      .contains("Do not share or sell my info")
-      .click();
-    cy.get('iframe[title="SP Consent Message"]', { timeout: 3000 }).then(
-      ($iframe) => {
-        cy.wrap($iframe)
-          .its("0.contentDocument.body")
-          .find('[aria-label="privacy manager"] p[class*="h1"]')
-          .should("have.text", "Your Cookie & Data Settings");
-      }
+    mainFunctions.clickLink(
+      homeLocators.LINKS_FOOTER_INFORMATIVE,
+      "Do not share or sell my info"
     );
+    cy.wait(2000);
+    cy.url().then((url) => {
+      if (url.includes("/how-can-i-change-my-bbc-cookie-settings/")) {
+        mainFunctions.assertURL("/how-can-i-change-my-bbc-cookie-settings/");
+      } else {
+        cy.get(mainFunctionLocators.IFRAME, { timeout: 3000 }).then(
+          ($iframe) => {
+            cy.wrap($iframe)
+              .its(mainFunctionLocators.IFRAME_BODY)
+              .find(homeLocators.IFRAME_HEADER)
+              .should("have.text", "Your Cookie & Data Settings");
+          }
+        );
+      }
+    });
   });
 
   it("Verify that footer informative link Contact technical support in the footer bar load the correct pages.", () => {

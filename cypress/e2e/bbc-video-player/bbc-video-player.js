@@ -1,33 +1,31 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { homeLocators } from "../../support/pageObject/locators/bbc-home-navigation-locators/home-navigation-locators";
-import { bbcVideoLocators } from "../../support/pageObject/locators/bbc-video-locators/bbc-video-locators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import VideoPlayerFunctions from "../../support/pageObject/bbc-video/bbc-video-main-functions";
+import { bbcVideoLocators } from "../../support/pageObject/bbc-video/bbc-video-locators";
+import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify video fuctionality", () => {
   const mainFunctions = new MainFunctions();
+  const videoPlayerFunctions = new VideoPlayerFunctions();
 
   beforeEach(() => {
     mainFunctions.beforeEachRoutine();
     mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Video");
     mainFunctions.assertURL("/video");
-    cy.wait(20000);
-    mainFunctions.registerPopUp();
+    cy.wait(8000);
+    mainFunctions.acceptCookies();
+    cy.wait(15000);
+    mainFunctions.closePopUpWindow();
+    cy.wait(2000);
+    
   });
 
   it("Verify that video will stop and play on click", () => {
-    mainFunctions.videoHandler(bbcVideoLocators.PAUSE_BUTTON);
-    cy.get(bbcVideoLocators.PLAY_BUTTON, { includeShadowDom: true }).should(
-      "have.attr",
-      "aria-hidden",
-      "false"
-    );
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PAUSE_BUTTON);
+    videoPlayerFunctions.assertAttributeFalse(bbcVideoLocators.PLAY_BUTTON);
     cy.wait(2000);
-    mainFunctions.videoHandler(bbcVideoLocators.PLAY_BUTTON);
-    cy.get(bbcVideoLocators.PAUSE_BUTTON, { includeShadowDom: true }).should(
-      "have.attr",
-      "aria-hidden",
-      "false"
-    );
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAY_BUTTON);
+    videoPlayerFunctions.assertAttributeFalse(bbcVideoLocators.PAUSE_BUTTON);
   });
 
   it("Verify that video 10 seconds forward and backward buttons work correctly", () => {
@@ -37,9 +35,15 @@ describe("Verify video fuctionality", () => {
       .find(bbcVideoLocators.TIME_TEXT, { includeShadowDom: true })
       .then(($timeEl) => {
         const timeText = $timeEl[0].innerHTML;
-        mainFunctions.videoHandler(bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON);
-        mainFunctions.videoHandler(bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON);
-        mainFunctions.videoHandler(bbcVideoLocators.BACK_TEN_SECOND_BUTTON);
+        videoPlayerFunctions.clickVideoButton(
+          bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON
+        );
+        videoPlayerFunctions.clickVideoButton(
+          bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON
+        );
+        videoPlayerFunctions.clickVideoButton(
+          bbcVideoLocators.BACK_TEN_SECOND_BUTTON
+        );
         cy.get(bbcVideoLocators.TIME_CURRENT, { includeShadowDom: true })
           .shadow()
           .find(bbcVideoLocators.TIME_TEXT, { includeShadowDom: true })
@@ -51,70 +55,66 @@ describe("Verify video fuctionality", () => {
   });
 
   it("Verify that video responsive to volume mute/unmute", () => {
-    mainFunctions.videoHandler(bbcVideoLocators.SOUND_BUTTON_MUTE);
-    cy.get(bbcVideoLocators.SOUND_VOLUME_SLIDE_BAR, { includeShadowDom: true })
-      .eq(1)
-      .should("have.attr", "aria-valuetext", "Muted");
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SOUND_BUTTON_MUTE);
+    videoPlayerFunctions.assertAttribute(
+      bbcVideoLocators.SOUND_VOLUME_SLIDE_BAR,
+      "Muted"
+    );
     cy.wait(4000);
-    mainFunctions.videoHandler(bbcVideoLocators.SOUND_BUTTON_UNMUTE);
-    cy.get(bbcVideoLocators.SOUND_VOLUME_SLIDE_BAR, { includeShadowDom: true })
-      .eq(1)
-      .should("have.attr", "aria-valuetext", "Volume level 8");
-    cy.wait(4000);
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SOUND_BUTTON_UNMUTE);
+    videoPlayerFunctions.assertAttribute(
+      bbcVideoLocators.SOUND_VOLUME_SLIDE_BAR,
+      "Volume level 8"
+    );
+    cy.wait(2000);
   });
 
   it("Verify that video  responsive to have playback speed 2x and 0.5", () => {
-    mainFunctions.videoHandler(bbcVideoLocators.PLAYBACK_SPEED_2X);
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAYBACK_SPEED_2X);
     cy.wait(4000);
-    cy.get(bbcVideoLocators.PLAYBACK_SPEED_TEXT, {
-      includeShadowDom: true,
-    })
-      .invoke("text")
-      .then((text) => {
-        const equalVal = text.split("×");
-        const firstValue = equalVal[0].trim();
-        expect(firstValue).to.equal("2");
-      });
-    mainFunctions.videoHandler(bbcVideoLocators.PLAYBACK_SPEED_05X);
+    videoPlayerFunctions.getValuePlaybackSpeed(
+      bbcVideoLocators.PLAYBACK_SPEED_TEXT,
+      "2"
+    );
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAYBACK_SPEED_05X);
     cy.wait(2000);
-    cy.get(bbcVideoLocators.PLAYBACK_SPEED_TEXT, {
-      includeShadowDom: true,
-    })
-      .invoke("text")
-      .then((text) => {
-        const equalVal = text.split("×");
-        const firstValue = equalVal[0].trim();
-        expect(firstValue).to.equal("0.5");
-      });
+    videoPlayerFunctions.getValuePlaybackSpeed(
+      bbcVideoLocators.PLAYBACK_SPEED_TEXT,
+      "0.5"
+    );
   });
 
   it("Verify that autoplay can be turned off/turned on", () => {
-    mainFunctions.videoHandler(bbcVideoLocators.PLAYBACK_SETTINGS_MENU);
-    mainFunctions.videoHandler(bbcVideoLocators.AUTOPLAY_TOGGLE);
-    cy.get(bbcVideoLocators.AUTOPLAY_TOGGLE, { includeShadowDom: true }).should(
-      "not.contain",
-      "toggle_on"
+    videoPlayerFunctions.clickVideoButton(
+      bbcVideoLocators.PLAYBACK_SETTINGS_MENU
+    );
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.AUTOPLAY_TOGGLE);
+    videoPlayerFunctions.toggleOnAssertion(
+      bbcVideoLocators.AUTOPLAY_TOGGLE,
+      "not.contain"
     );
     cy.wait(2000);
 
-    mainFunctions.videoHandler(bbcVideoLocators.AUTOPLAY_TOGGLE);
-    cy.get(bbcVideoLocators.AUTOPLAY_TOGGLE, { includeShadowDom: true }).should(
-      "have.class",
-      "toggle_on"
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.AUTOPLAY_TOGGLE);
+    videoPlayerFunctions.toggleOnAssertion(
+      bbcVideoLocators.AUTOPLAY_TOGGLE,
+      "have.class"
     );
   });
 
   it("Verify that video response to turn off subtitles/turn on subtitles", () => {
-    mainFunctions.videoHandler(bbcVideoLocators.SUBTITLES_MENU);
-    mainFunctions.videoHandler(bbcVideoLocators.SUBTITLES_TOGGLE);
-    cy.get(bbcVideoLocators.SUBTITLES_TOGGLE, {
-      includeShadowDom: true,
-    }).should("not.contain", "toggle_on");
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_TOGGLE);
+    videoPlayerFunctions.toggleOnAssertion(
+      bbcVideoLocators.SUBTITLES_TOGGLE,
+      "not.contain"
+    );
     cy.wait(4000);
-    mainFunctions.videoHandler(bbcVideoLocators.SUBTITLES_MENU);
-    cy.get(bbcVideoLocators.SUBTITLES_TOGGLE, {
-      includeShadowDom: true,
-    }).should("have.class", "toggle_on");
+    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
+    videoPlayerFunctions.toggleOnAssertion(
+      bbcVideoLocators.SUBTITLES_TOGGLE,
+      "have.class"
+    );
     cy.wait(2000);
   });
 
@@ -134,17 +134,6 @@ describe("Verify video fuctionality", () => {
   // Video handler do not work
   // it.only("Verify that video  response screen size changes", () => {
   //   // Trigger the click event on the full screen button
-
-  // cy.get("#smp-ads-controls", { includeShadowDom: true }).then(
-  //   ($adsControls) => {
-  //     if ($adsControls.length > 0) {
-  //       cy.waitUntil(() => $adsControls.should("not.be.visible"));
-  //     } else {
-  //       mainFunctions.videoHandler('[aria-label="Skip forward 10 seconds"]');
-  //     }
-  //   }
-  // );
-
   //   cy.get('[aria-label="Enter full screen"]', { includeShadowDom: true })
   //     .trigger("mouseover")
   //     .realClick();
@@ -153,7 +142,7 @@ describe("Verify video fuctionality", () => {
   //   cy.get("smp-video-layout").should("have.class", "fullscreen");
 
   //   // Call your function to handle exiting full screen mode
-  //   mainFunctions.videoHandler('[aria-label="Exit full screen"]');
+  //   mainFunctions.clickVideoButton('[aria-label="Exit full screen"]');
 
   //   // Add assertions for other elements or behaviors after exiting full screen mode
   //   cy.get(".seek_bar_accessible_slider", { includeShadowDom: true })
@@ -163,11 +152,11 @@ describe("Verify video fuctionality", () => {
 
   // Video handler do not work
   // it.only("Verify that video  response to picture mode", () => {
-  //   mainFunctions.videoHandler('[aria-label="Open Picture in Picture mode"]');
+  //   mainFunctions.clickVideoButton('[aria-label="Open Picture in Picture mode"]');
   //   cy.wait(5000)
-  //   mainFunctions.videoHandler('[aria-label="Pause"]');
+  //   mainFunctions.clickVideoButton('[aria-label="Pause"]');
   //   cy.wait(2000)
-  //   mainFunctions.videoHandler('[aria-label="Play"]');
+  //   mainFunctions.clickVideoButton('[aria-label="Play"]');
   //   cy.wait(50000)
   // });
 
@@ -219,4 +208,19 @@ describe("Verify video fuctionality", () => {
   //           .eq(1)
   //           .should("have.attr", "aria-valuetext", "Volume level 1");
   //   });
+  //   addSkip() {
+  //   cy.get(mainFunctionLocators.BBC_BODY).then(($body) => {
+  //     if (
+  //       $body
+  //         .find("#smp-ads-wrapper", { includeShadowDom: true })
+  //         .is(":visible")
+  //     ) {
+  //       cy.get("#smp-ads-wrapper", { includeShadowDom: true }).then(
+  //         ($adsControls) => {
+  //           cy.waitUntil(() => $adsControls.should("not.be.visible"));
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
 });

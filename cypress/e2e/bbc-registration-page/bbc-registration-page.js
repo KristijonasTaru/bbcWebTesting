@@ -1,9 +1,9 @@
 /// <reference types="Cypress" />
-import MainFunctions from "../../support/pageObject/Main_Functions";
-import { homeLocators } from "../../support/pageObject/locators/bbc-home-navigation-locators/home-navigation-locators";
-import { registrationPageLocators } from "../../support/pageObject/locators/bbc-registration-page-locators/bbc-registration-pageLocators";
+import MainFunctions from "../../support/pageObject/main-functions";
+import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
+import { registrationPageLocators } from "../../support/pageObject/bbc-registration-page/bbc-registration-pageLocators";
 
-describe("Verify that the informational navigation links in the footer load the correct pages.", () => {
+describe("Verify that user registration page have validations.", () => {
   const mainFunctions = new MainFunctions();
 
   beforeEach(() => {
