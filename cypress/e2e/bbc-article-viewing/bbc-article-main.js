@@ -3,10 +3,9 @@ import MainFunctions from "../../support/pageObject/main-functions";
 import { articleLocators } from "../../support/pageObject/bbc-article/bbc-articles-locators";
 
 describe("Verify that the informational navigation links in the footer load the correct pages.", () => {
-  const mainFunctions = new MainFunctions();
 
   beforeEach(() => {
-    mainFunctions.beforeEachRoutine();
+    MainFunctions.beforeEachRoutine();
   });
 
   it("Verify that clicking on a news article headline takes the user to the full article page.", () => {
@@ -22,8 +21,8 @@ describe("Verify that the informational navigation links in the footer load the 
 
   it("Verify that article is centred", () => {
     cy.get(articleLocators.ARTICLES).first().click();
-    mainFunctions.acceptCookies();
-    mainFunctions.closePopUpWindow();
+    MainFunctions.acceptCookies();
+    MainFunctions.closePopUpWindow();
     cy.get(articleLocators.ARTICLE_TEXT).then(($articleText) => {
       const textStyle = window.getComputedStyle($articleText[0]);
       expect(textStyle.marginLeft).to.equal(textStyle.marginLeft);

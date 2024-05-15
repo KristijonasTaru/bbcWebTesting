@@ -3,62 +3,61 @@ import MainFunctions from "../../support/pageObject/main-functions";
 import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify Homepage Navigation in navbar works as expected", () => {
-  const mainFunctions = new MainFunctions();
 
   beforeEach(() => {
-    mainFunctions.beforeEachRoutine();
+    MainFunctions.beforeEachRoutine();
   });
 
   it("Verify that BBC.com homepage loaded", () => {
-    mainFunctions.bbcHomePageCorrectlyLoaded()
+    MainFunctions.bbcHomePageCorrectlyLoaded()
   });
 
   it("Verify that navigation link News in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "News");
-    mainFunctions.assertURL("/news");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "News");
+    MainFunctions.assertURL("/news");
   });
 
   it("Verify that navigation link Sport in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Sport");
-    mainFunctions.assertURL("/sport");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Sport");
+    MainFunctions.assertURL("/sport");
   });
 
   it("Verify that navigation link Business in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Business");
-    mainFunctions.assertURL("/business");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Business");
+    MainFunctions.assertURL("/business");
   });
 
   it("Verify that navigation link Innovation in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Innovation");
-    mainFunctions.assertURL("/innovation");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Innovation");
+    MainFunctions.assertURL("/innovation");
   });
 
   it("Verify that navigation link Culture in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Culture");
-    mainFunctions.assertURL("/culture");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Culture");
+    MainFunctions.assertURL("/culture");
   });
 
   it("Verify that navigation link Travel in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Travel");
-    mainFunctions.assertURL("/travel");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Travel");
+    MainFunctions.assertURL("/travel");
   });
   it("Verify that navigation link Earth in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Earth");
-    mainFunctions.assertURL("/future-planet");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Earth");
+    MainFunctions.assertURL("/future-planet");
   });
 
   it("Verify that navigation link Video in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Video");
-    mainFunctions.assertURL("/video");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Video");
+    MainFunctions.assertURL("/video");
   });
 
   it("Verify that navigation link Live in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Live");
-    mainFunctions.assertURL("/live");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Live");
+    MainFunctions.assertURL("/live");
   });
 
   it("Verify that navigation link Home in the navigation bar load the correct pages.", () => {
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Home");
-    mainFunctions.assertURL("/");
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Home");
+    MainFunctions.assertURL("/");
   });
 });

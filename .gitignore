@@ -4,4 +4,3 @@ cypress/videos
 cypress/screenshots
 mochawesome-report
 cypress/results/
-cypress/fixtures/

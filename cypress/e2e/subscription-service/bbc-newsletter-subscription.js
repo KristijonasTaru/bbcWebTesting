@@ -4,27 +4,26 @@ import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-
 import { subscriptionLocators } from "../../support/pageObject/subscription-service/subscription-service-locators";
 
 describe("Verify that the Newsletter Subscription works.", () => {
-  const mainFunctions = new MainFunctions();
 
   beforeEach(() => {
-    mainFunctions.beforeEachRoutine();
+    MainFunctions.beforeEachRoutine();
   });
 
   it("Verify that the user can log in to the BBC.com webpage.", () => {
-    mainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
-    mainFunctions.assertURL("/auth");
-    mainFunctions.signInToBbc();
+    MainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
+    MainFunctions.assertURL("/auth");
+    MainFunctions.signInToBbc();
   });
 
   it("Verify that the user can subscribe to the BBC.com newsletter", () => {
-    mainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
-    mainFunctions.assertURL("/auth");
-    mainFunctions.signInToBbc();
+    MainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
+    MainFunctions.assertURL("/auth");
+    MainFunctions.signInToBbc();
     cy.get(subscriptionLocators.MENU_YOUR_ACCOUNT_BUTTON, {
       timeout: 3000,
     }).click();
     cy.get(subscriptionLocators.MENU_SETTINGS).click();
-    mainFunctions.assertTitle("account overview");
+    MainFunctions.assertTitle("account overview");
     cy.get(subscriptionLocators.FOOTER_SUBSCRIBE).click();
     cy.get(subscriptionLocators.SUBSCRIBE_SIGN_IN).click();
     cy.get(subscriptionLocators.CONFIRM_SUBSCRIPTION, {
@@ -36,25 +35,25 @@ describe("Verify that the Newsletter Subscription works.", () => {
   });
 
   it("Verify that the user can unsubscribe to the BBC.com newsletter.", () => {
-    mainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
-    mainFunctions.assertURL("/auth");
-    mainFunctions.signInToBbc();
+    MainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
+    MainFunctions.assertURL("/auth");
+    MainFunctions.signInToBbc();
     cy.get(subscriptionLocators.MENU_YOUR_ACCOUNT_BUTTON, {
       timeout: 3000,
     }).click();
     cy.get(subscriptionLocators.MENU_SETTINGS).click();
-    mainFunctions.assertTitle("account overview");
+    MainFunctions.assertTitle("account overview");
 
-    mainFunctions.clickLink(
+    MainFunctions.clickLink(
       subscriptionLocators.MAIN_USER_PAGE_SETTINGS,
       "Settings"
     );
-    mainFunctions.assertURL("/account/settings");
-    mainFunctions.clickLink(
+    MainFunctions.assertURL("/account/settings");
+    MainFunctions.clickLink(
       subscriptionLocators.EMAIL_PREFERENCES,
       "Email preferences"
     );
-    mainFunctions.assertURL("/settings/email-preferences");
+    MainFunctions.assertURL("/settings/email-preferences");
 
     cy.get(subscriptionLocators.BBC_EMAIL_FOR_YOU)
       .click()

@@ -1,18 +1,18 @@
 import { mainFunctionLocators } from "./main-function/main-function-locators";
 
-class MainFunctions {
-  clickLink(locator, itemName) {
+export default class MainFunctions {
+  static clickLink(locator, itemName) {
     cy.get(locator, { timeout: 5000 }).contains(itemName).click();
   }
-  assertURL(expectedUrlPart) {
+  static assertURL(expectedUrlPart) {
     cy.url().should("include", expectedUrlPart);
   }
 
-  assertTitle(expectedTitle) {
+  static assertTitle(expectedTitle) {
     cy.title().should("include", expectedTitle);
   }
 
-  acceptCookies() {
+  static acceptCookies() {
     cy.wait(2000);
     cy.get(mainFunctionLocators.BBC_BODY).then(($body) => {
       if ($body.find(mainFunctionLocators.IFRAME).is(":visible")) {
@@ -26,7 +26,7 @@ class MainFunctions {
     });
   }
 
-  closePopUpWindow() {
+  static closePopUpWindow() {
     cy.get(mainFunctionLocators.BBC_BODY, { timeout: 5000 }).then(($body) => {
       if (
         $body.find(mainFunctionLocators.SIGN_TO_BBC_CLOSE_BUTTON).is(":visible")
@@ -36,14 +36,14 @@ class MainFunctions {
     });
   }
 
-  beforeEachRoutine() {
+  static beforeEachRoutine() {
     cy.visit("/");
     this.acceptCookies();
     cy.get(mainFunctionLocators.MAIN_PAGE_HEADER).should("exist");
     cy.get(mainFunctionLocators.BODY_COOKIES_AGREE).click();
   }
 
-  bbcHomePageCorrectlyLoaded() {
+  static bbcHomePageCorrectlyLoaded() {
     cy.intercept("GET", "https://www.bbc.com/").as("bbc");
     cy.visit("/");
     cy.wait("@bbc").then((interception) => {
@@ -52,7 +52,7 @@ class MainFunctions {
     cy.title().should("include", "BBC Home");
   }
 
-  signInToBbc() {
+  static signInToBbc() {
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(mainFunctionLocators.SIGN_IN_EMAIL).type(credentials.env.email);
       cy.wait(1000);
@@ -68,5 +68,3 @@ class MainFunctions {
     });
   }
 }
-
-export default MainFunctions;

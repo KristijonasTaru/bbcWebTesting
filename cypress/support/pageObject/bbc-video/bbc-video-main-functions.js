@@ -1,11 +1,11 @@
-class VideoPlayerFunctions {
-  clickVideoButton(locator) {
+export default class VideoPlayerFunctions {
+  static clickVideoButton(locator) {
     cy.get(locator, { timeout: 5000, includeShadowDom: true }).click({
       force: true,
     });
   }
 
-  assertAttributeFalse(locator) {
+  static assertAttributeFalse(locator) {
     cy.get(locator, { includeShadowDom: true }).should(
       "have.attr",
       "aria-hidden",
@@ -13,13 +13,13 @@ class VideoPlayerFunctions {
     );
   }
 
-  assertAttribute(locator, attrValue) {
+  static assertAttribute(locator, attrValue) {
     cy.get(locator, { includeShadowDom: true })
       .eq(1)
       .should("have.attr", "aria-valuetext", attrValue);
   }
 
-  getValuePlaybackSpeed(locator, speedValue) {
+  static getValuePlaybackSpeed(locator, speedValue) {
     cy.get(locator, {
       includeShadowDom: true,
     })
@@ -31,7 +31,7 @@ class VideoPlayerFunctions {
       });
   }
 
-  toggleOnAssertion(locator, doContain){
+  static toggleOnAssertion(locator, doContain){
     cy.get(locator, { includeShadowDom: true }).should(
         doContain,
         "toggle_on"
@@ -39,4 +39,3 @@ class VideoPlayerFunctions {
   }
 }
 
-export default VideoPlayerFunctions;

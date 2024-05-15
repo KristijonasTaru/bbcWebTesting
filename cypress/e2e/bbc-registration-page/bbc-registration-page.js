@@ -4,29 +4,27 @@ import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-
 import { registrationPageLocators } from "../../support/pageObject/bbc-registration-page/bbc-registration-pageLocators";
 
 describe("Verify that user registration page have validations.", () => {
-  const mainFunctions = new MainFunctions();
-
   beforeEach(() => {
-    mainFunctions.beforeEachRoutine();
+    MainFunctions.beforeEachRoutine();
   });
 
   it("Verify that users can't register if its under 16 year old", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.UNDER_SIXTEEN_BUTTON).click();
     cy.get(registrationPageLocators.UNDER_SIXTEEN_INFORMATIVE_MESSAGE).should(
       "have.text",
       "Sorry, only 16s and over can register outside the UK"
     );
     cy.get(registrationPageLocators.UNDER_SIXTEEN_OK_BUTTON).click();
-    mainFunctions.assertTitle("BBC Home - Breaking News, World News");
+    MainFunctions.assertTitle("BBC Home - Breaking News, World News");
   });
 
   it("Verify that user can not insert dates that is unreasonable - incorrect year", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(
@@ -47,9 +45,9 @@ describe("Verify that user registration page have validations.", () => {
   });
 
   it("Verify that user can not insert dates that is unreasonable - incorrect month", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(
@@ -70,9 +68,9 @@ describe("Verify that user registration page have validations.", () => {
   });
 
   it("Verify that user can not insert dates that is unreasonable - incorrect day", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(
@@ -93,9 +91,9 @@ describe("Verify that user registration page have validations.", () => {
   });
 
   it("Verify that user can not insert dates that is unreasonable - minor", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(
@@ -116,9 +114,9 @@ describe("Verify that user registration page have validations.", () => {
   });
 
   it("Verify that user can not register with not valid email address ", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(
@@ -147,9 +145,9 @@ describe("Verify that user registration page have validations.", () => {
   });
 
   it("Verify that password validation is working as expected (password to short)", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(
@@ -178,9 +176,9 @@ describe("Verify that user registration page have validations.", () => {
   });
 
   it("Verify that password validation is working as expected (password missing letter)", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(
@@ -209,9 +207,9 @@ describe("Verify that user registration page have validations.", () => {
   });
 
   it("Verify that user can not register with not valid email address ", () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
     cy.get(registrationPageLocators.OVER_SIXTEEN_BUTTON).click();
     cy.fixture("credentials.json").then((credentials) => {
       cy.get(registrationPageLocators.DOB_DAY_INPUT).type(

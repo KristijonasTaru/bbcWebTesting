@@ -5,27 +5,25 @@ import { bbcVideoLocators } from "../../support/pageObject/bbc-video/bbc-video-l
 import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify video fuctionality", () => {
-  const mainFunctions = new MainFunctions();
-  const videoPlayerFunctions = new VideoPlayerFunctions();
 
   beforeEach(() => {
-    mainFunctions.beforeEachRoutine();
-    mainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Video");
-    mainFunctions.assertURL("/video");
+    MainFunctions.beforeEachRoutine();
+    MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Video");
+    MainFunctions.assertURL("/video");
     cy.wait(8000);
-    mainFunctions.acceptCookies();
+    MainFunctions.acceptCookies();
     cy.wait(15000);
-    mainFunctions.closePopUpWindow();
+    MainFunctions.closePopUpWindow();
     cy.wait(2000);
     
   });
 
   it("Verify that video will stop and play on click", () => {
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PAUSE_BUTTON);
-    videoPlayerFunctions.assertAttributeFalse(bbcVideoLocators.PLAY_BUTTON);
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.PAUSE_BUTTON);
+    VideoPlayerFunctions.assertAttributeFalse(bbcVideoLocators.PLAY_BUTTON);
     cy.wait(2000);
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAY_BUTTON);
-    videoPlayerFunctions.assertAttributeFalse(bbcVideoLocators.PAUSE_BUTTON);
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAY_BUTTON);
+    VideoPlayerFunctions.assertAttributeFalse(bbcVideoLocators.PAUSE_BUTTON);
   });
 
   it("Verify that video 10 seconds forward and backward buttons work correctly", () => {
@@ -35,13 +33,13 @@ describe("Verify video fuctionality", () => {
       .find(bbcVideoLocators.TIME_TEXT, { includeShadowDom: true })
       .then(($timeEl) => {
         const timeText = $timeEl[0].innerHTML;
-        videoPlayerFunctions.clickVideoButton(
+        VideoPlayerFunctions.clickVideoButton(
           bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON
         );
-        videoPlayerFunctions.clickVideoButton(
+        VideoPlayerFunctions.clickVideoButton(
           bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON
         );
-        videoPlayerFunctions.clickVideoButton(
+        VideoPlayerFunctions.clickVideoButton(
           bbcVideoLocators.BACK_TEN_SECOND_BUTTON
         );
         cy.get(bbcVideoLocators.TIME_CURRENT, { includeShadowDom: true })
@@ -55,14 +53,14 @@ describe("Verify video fuctionality", () => {
   });
 
   it("Verify that video responsive to volume mute/unmute", () => {
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SOUND_BUTTON_MUTE);
-    videoPlayerFunctions.assertAttribute(
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SOUND_BUTTON_MUTE);
+    VideoPlayerFunctions.assertAttribute(
       bbcVideoLocators.SOUND_VOLUME_SLIDE_BAR,
       "Muted"
     );
     cy.wait(4000);
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SOUND_BUTTON_UNMUTE);
-    videoPlayerFunctions.assertAttribute(
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SOUND_BUTTON_UNMUTE);
+    VideoPlayerFunctions.assertAttribute(
       bbcVideoLocators.SOUND_VOLUME_SLIDE_BAR,
       "Volume level 8"
     );
@@ -70,48 +68,48 @@ describe("Verify video fuctionality", () => {
   });
 
   it("Verify that video  responsive to have playback speed 2x and 0.5", () => {
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAYBACK_SPEED_2X);
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAYBACK_SPEED_2X);
     cy.wait(4000);
-    videoPlayerFunctions.getValuePlaybackSpeed(
+    VideoPlayerFunctions.getValuePlaybackSpeed(
       bbcVideoLocators.PLAYBACK_SPEED_TEXT,
       "2"
     );
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAYBACK_SPEED_05X);
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.PLAYBACK_SPEED_05X);
     cy.wait(2000);
-    videoPlayerFunctions.getValuePlaybackSpeed(
+    VideoPlayerFunctions.getValuePlaybackSpeed(
       bbcVideoLocators.PLAYBACK_SPEED_TEXT,
       "0.5"
     );
   });
 
   it("Verify that autoplay can be turned off/turned on", () => {
-    videoPlayerFunctions.clickVideoButton(
+    VideoPlayerFunctions.clickVideoButton(
       bbcVideoLocators.PLAYBACK_SETTINGS_MENU
     );
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.AUTOPLAY_TOGGLE);
-    videoPlayerFunctions.toggleOnAssertion(
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.AUTOPLAY_TOGGLE);
+    VideoPlayerFunctions.toggleOnAssertion(
       bbcVideoLocators.AUTOPLAY_TOGGLE,
       "not.contain"
     );
     cy.wait(2000);
 
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.AUTOPLAY_TOGGLE);
-    videoPlayerFunctions.toggleOnAssertion(
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.AUTOPLAY_TOGGLE);
+    VideoPlayerFunctions.toggleOnAssertion(
       bbcVideoLocators.AUTOPLAY_TOGGLE,
       "have.class"
     );
   });
 
   it("Verify that video response to turn off subtitles/turn on subtitles", () => {
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_TOGGLE);
-    videoPlayerFunctions.toggleOnAssertion(
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_TOGGLE);
+    VideoPlayerFunctions.toggleOnAssertion(
       bbcVideoLocators.SUBTITLES_TOGGLE,
       "not.contain"
     );
     cy.wait(4000);
-    videoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
-    videoPlayerFunctions.toggleOnAssertion(
+    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
+    VideoPlayerFunctions.toggleOnAssertion(
       bbcVideoLocators.SUBTITLES_TOGGLE,
       "have.class"
     );

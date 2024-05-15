@@ -3,31 +3,30 @@ import MainFunctions from "../../support/pageObject/main-functions";
 import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify that the informational navigation links in the footer load the correct pages.", () => {
-  const mainFunctions = new MainFunctions();
 
   beforeEach(() => {
-    mainFunctions.beforeEachRoutine();
+    MainFunctions.beforeEachRoutine();
   });
 
   it("Verify that logo in header is visible and clickable", () => {
     cy.get(homeLocators.BBC_NAV_LOGO).should("be.visible").click();
-    mainFunctions.assertTitle("BBC Home");
+    MainFunctions.assertTitle("BBC Home");
   });
 
   it("Verify that logo in footer is visible and clickable", () => {
     cy.get(homeLocators.BBC_FOOTER_LOGO).should("be.visible").click();
-    mainFunctions.assertTitle("BBC Home");
+    MainFunctions.assertTitle("BBC Home");
   });
 
   it('Verify that "Register" link works correctly', () => {
-    mainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
-    mainFunctions.assertURL("/register");
-    mainFunctions.assertTitle("Register");
+    MainFunctions.clickLink(homeLocators.LINK_REGISTER, "Register");
+    MainFunctions.assertURL("/register");
+    MainFunctions.assertTitle("Register");
   });
 
   it('Verify that "Sign in" link works correctly', () => {
-    mainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
-    mainFunctions.assertURL("/auth");
-    mainFunctions.assertTitle("Sign in");
+    MainFunctions.clickLink(homeLocators.LINK_SIGN_IN, "Sign In");
+    MainFunctions.assertURL("/auth");
+    MainFunctions.assertTitle("Sign in");
   });
 });
