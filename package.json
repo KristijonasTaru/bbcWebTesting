@@ -4,7 +4,7 @@
   "description": "bbc_webpage_testing",
   "main": "index.js",
   "scripts": {
-    "triggerAllTest": "NO_COLOR=1 cypress run",
+    "triggerAllTest": "npx NO_COLOR=1 cypress run",
     "openCypress": "npx cypress open",
     "cypressChromeEdge": "npm run triggerAllTest -- --browser chrome & npm run triggerAllTest -- --browser edge",
     "cypressFirefox": "npm run triggerAllTest -- --browser firefox --headed",
