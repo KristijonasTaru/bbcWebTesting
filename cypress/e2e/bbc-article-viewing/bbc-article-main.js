@@ -25,7 +25,7 @@ describe("Verify that the informational navigation links in the footer load the 
     MainFunctions.closePopUpWindow();
     cy.get(articleLocators.ARTICLE_TEXT).then(($articleText) => {
       const textStyle = window.getComputedStyle($articleText[0]);
-      expect(textStyle.marginLeft).to.equal(textStyle.marginLeft);
+      expect(textStyle.marginLeft).to.equal(textStyle.marginRight);
     });
   });
 });
