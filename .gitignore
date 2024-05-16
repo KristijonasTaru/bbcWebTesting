@@ -2,5 +2,5 @@ node_modules
 results
 cypress/videos
 cypress/screenshots
-mochawesome-report
+cypress/mochawesome
 cypress/results/
