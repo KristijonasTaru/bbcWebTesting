@@ -45,7 +45,7 @@ pipeline {
                 sh 'ls -la "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"' // List contents of destination directory after copying
             }
                 // Artifact - any file created while running build, lower line ensure, that new file will be created even it's empty 
-                archiveArtifacts artifacts: 'mochawesome-report/*', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'mochawesome-report/mochawesome.html', allowEmptyArchive: true
         }
     }
 }
