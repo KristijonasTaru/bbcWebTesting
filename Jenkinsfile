@@ -25,7 +25,7 @@ pipeline {
                     // Run all Cypress tests, || true to keep pipeline running even after fail
                     sh 'npm run triggerAllTest || true'
 
-                    // ansiColor for console to have readible file in jenkins
+                    // ansiColor for console to have readable file in Jenkins
                     echo '\033[34mHello\033[0m \033[33mcolorful\033[0m \033[35mworld!\033[0m'
                 }
             }
@@ -38,10 +38,13 @@ pipeline {
                 // Create mochawesome report
                 sh 'npm run mergeMochawesome'
 
-                 // Corrected cp command with quotes around the destination directory
+                // List contents of destination directory after copying
+                sh 'ls -la "C:\\Users\\.jenkins\\workspace\\BBC Web Automation Testing"'
+
+                // Corrected cp command with quotes around the destination directory
                 sh 'cp -r mochawesome-report/assets mochawesome-report/mochawesome.html "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
             }
-            // Artifact - any file created while running build, lower line ensure, that new file will be created even it's empty 
+            // Artifact - specify the path to the HTML report to archive
             archiveArtifacts artifacts: 'mochawesome-report/mochawesome.html', allowEmptyArchive: true
         }
     }
