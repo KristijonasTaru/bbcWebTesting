@@ -13,7 +13,6 @@ module.exports = defineConfig({
     reporter: "cypress-multi-reporters",
     reporterOptions: {
       configFile: "reporter-config.json",
-      cdn: true
     },
     viewportHeight: 1080,
     viewportWidth: 1920

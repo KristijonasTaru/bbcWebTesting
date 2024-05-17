@@ -17,7 +17,7 @@
     "runVideoPlayer": "npx cypress run --spec cypress/e2e/bbc-video-player/*",
     "runLanguageSelection": "npx cypress run --spec cypress/e2e/language-selection/*",
     "runSubscriptionService": "npx cypress run --spec cypress/e2e/subscription-service/*",
-    "mergeMochawesome": "npx mochawesome-merge cypress/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json",
+    "mergeMochawesome": "npx mochawesome-merge cypress/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json --cdn",
     "deleteMochawesomeJson": "rm -rf cypress/mochawesome/* || true",
     "deleteMochawesomeReports": "rm -rf mochawesome-report/* || true",
     "cypressRegressionPack": "npm run deleteMochawesomeJson && npm run deleteMochawesomeReports && npm run triggerAllTest || true && npm run mergeMochawesome"
