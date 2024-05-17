@@ -39,7 +39,7 @@ pipeline {
                 sh 'npm run mergeMochawesome'
 
                 // List contents of destination directory after copying
-                sh 'ls -la "C:\\Users\\.jenkins\\workspace\\BBC Web Automation Testing"'
+                sh 'ls -la "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
 
                 // Corrected cp command with quotes around the destination directory
                 sh 'cp -r mochawesome-report/assets mochawesome-report/mochawesome.html "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
