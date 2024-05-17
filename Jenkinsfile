@@ -38,11 +38,11 @@ pipeline {
                 // Create mochawesome report
                 sh 'npm run mergeMochawesome'
 
-                // List contents of destination directory after copying
-                sh 'ls -la "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
-
                 // Corrected cp command with quotes around the destination directory
                 sh 'cp -r mochawesome-report/assets mochawesome-report/mochawesome.html "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
+
+                // List contents of destination directory after copying
+                sh 'ls -la "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
             }
             // Artifact - specify the path to the HTML report to archive
             archiveArtifacts artifacts: 'mochawesome-report/mochawesome.html', allowEmptyArchive: true
