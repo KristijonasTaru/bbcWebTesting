@@ -44,7 +44,7 @@ pipeline {
                 // List contents of destination directory after copying
                 sh 'ls -la "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
 
-                 // Publish HTML report
+                // Publish HTML report
                 publishHTML target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
