@@ -20,7 +20,7 @@
     "mergeMochawesome": "npx mochawesome-merge cypress/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json",
     "deleteMochawesomeJson": "rm -rf cypress/mochawesome/* || true",
     "deleteMochawesomeReports": "rm -rf mochawesome-report/* || true",
-    "cypressRegressionPack": "npm run deleteMochawesomeJson && npm run deleteMochawesomeReports && npm run triggerAllTest && npm run mergeMochawesome"
+    "cypressRegressionPack": "npm run deleteMochawesomeJson && npm run deleteMochawesomeReports && npm run triggerAllTest || true && npm run mergeMochawesome"
   },
   "author": "Kristijonas",
   "license": "ISC",

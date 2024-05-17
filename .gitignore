@@ -4,3 +4,4 @@ cypress/videos
 cypress/screenshots
 cypress/mochawesome
 cypress/results/
+mochawesome.json
