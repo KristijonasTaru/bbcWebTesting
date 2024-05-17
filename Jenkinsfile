@@ -43,6 +43,17 @@ pipeline {
 
                 // List contents of destination directory after copying
                 sh 'ls -la "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
+
+                 // Publish HTML report
+                publishHTML target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'mochawesome-report',
+                    reportFiles: 'mochawesome.html',
+                    reportName: 'Mochawesome Report',
+                    reportTitles: 'Mochawesome Test Report'
+                ]
             }
             // Artifact - specify the path to the HTML report to archive
             archiveArtifacts artifacts: 'mochawesome-report/mochawesome.html', allowEmptyArchive: true
