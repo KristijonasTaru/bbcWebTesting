@@ -27,7 +27,7 @@ export default class MainFunctions {
   }
 
   static closePopUpWindow() {
-    cy.get(mainFunctionLocators.BBC_BODY, { timeout: 5000 }).then(($body) => {
+    cy.get(mainFunctionLocators.BBC_BODY).then(($body) => {
       if (
         $body.find(mainFunctionLocators.SIGN_TO_BBC_CLOSE_BUTTON).is(":visible")
       ) {

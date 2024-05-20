@@ -15,6 +15,7 @@ export const bbcVideoLocators = {
     AUTOPLAY_TOGGLE: '[aria-label="Autoplay"]',
     SUBTITLES_MENU: '[aria-label="Turn subtitles on and open subtitles settings menu"]',
     SUBTITLES_TOGGLE: '[aria-label="Subtitles"]',
+    SUBTITLES_SETTINGS: '[aria-label="Open subtitles settings menu"]',
     SIDE_VIDEOS_HEADERS: '[data-testid="aberdeen-video"] > div:last-child [data-testid="card-headline"]',
     SIDE_VIDEOS: '[data-testid="aberdeen-video"]',
     MAIN_VIDEO_HEADER: '[data-testid="hawaiiMainCardHeadlineStyled"]',

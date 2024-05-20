@@ -5,17 +5,15 @@ import { bbcVideoLocators } from "../../support/pageObject/bbc-video/bbc-video-l
 import { homeLocators } from "../../support/pageObject/bbc-home-navigation/home-navigation-locators";
 
 describe("Verify video fuctionality", () => {
-
   beforeEach(() => {
     MainFunctions.beforeEachRoutine();
     MainFunctions.clickLink(homeLocators.LINKS_NAVBAR, "Video");
     MainFunctions.assertURL("/video");
-    cy.wait(8000);
+    cy.wait(5000);
     MainFunctions.acceptCookies();
-    cy.wait(15000);
+    cy.wait(11000);
     MainFunctions.closePopUpWindow();
-    cy.wait(2000);
-    
+    cy.wait(1000);
   });
 
   it("Verify that video will stop and play on click", () => {
@@ -101,19 +99,30 @@ describe("Verify video fuctionality", () => {
   });
 
   it("Verify that video response to turn off subtitles/turn on subtitles", () => {
-    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
-    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_TOGGLE);
-    VideoPlayerFunctions.toggleOnAssertion(
-      bbcVideoLocators.SUBTITLES_TOGGLE,
-      "not.contain"
-    );
-    cy.wait(4000);
-    VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
-    VideoPlayerFunctions.toggleOnAssertion(
-      bbcVideoLocators.SUBTITLES_TOGGLE,
-      "have.class"
-    );
-    cy.wait(2000);
+    cy.get(bbcVideoLocators.SUBTITLES_SETTINGS, {
+      includeShadowDom: true,
+    }).then(($button) => {
+      const ariaHidden = $button.attr("aria-hidden");
+      if (ariaHidden === "false") {
+        VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
+        VideoPlayerFunctions.clickVideoButton(
+          bbcVideoLocators.SUBTITLES_TOGGLE
+        );
+        VideoPlayerFunctions.toggleOnAssertion(
+          bbcVideoLocators.SUBTITLES_TOGGLE,
+          "not.contain"
+        );
+        cy.wait(4000);
+        VideoPlayerFunctions.clickVideoButton(bbcVideoLocators.SUBTITLES_MENU);
+        VideoPlayerFunctions.toggleOnAssertion(
+          bbcVideoLocators.SUBTITLES_TOGGLE,
+          "have.class"
+        );
+        cy.wait(2000);
+      } else {
+        cy.log("There are no subtitles on this video.");
+      }
+    });
   });
 
   it("Verify that user can play next video manually", () => {

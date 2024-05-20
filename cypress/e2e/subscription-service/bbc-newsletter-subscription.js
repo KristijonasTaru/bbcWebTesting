@@ -51,9 +51,10 @@ describe("Verify that the Newsletter Subscription works.", () => {
       "Email preferences"
     );
     MainFunctions.assertURL("/settings/email-preferences");
-
-    cy.get(subscriptionLocators.BBC_EMAIL_FOR_YOU)
-      .click()
-      .should("not.be.checked");
+    cy.get(subscriptionLocators.BBC_EMAIL_FOR_YOU).click();
+    cy.wait(2000)
+    cy.get(subscriptionLocators.FOOTER_SUBSCRIBE).click();
+    cy.get(subscriptionLocators.SUBSCRIBE_SIGN_IN).click();
+    cy.get(subscriptionLocators.CONFIRM_SUBSCRIPTION_TEXT).should("have.text", "Sign Up!");
   });
 });
