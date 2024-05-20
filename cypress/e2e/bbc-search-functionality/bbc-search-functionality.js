@@ -6,6 +6,7 @@ import SearchFunctions from "../../support/pageObject/bbc-search-fuctionality/bb
 describe("Verify search bar functionality", () => {
   const randomSearchValue = faker.word.words(2);
   beforeEach(() => {
+    cy.clearCookies()
     MainFunctions.beforeEachRoutine();
   });
 
