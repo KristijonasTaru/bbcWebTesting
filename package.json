@@ -1,0 +1,41 @@
+{
+  "name": "bbcwebpagetesting",
+  "version": "1.0.0",
+  "description": "bbc_webpage_testing",
+  "main": "index.js",
+  "scripts": {
+    "triggerAllTest": "npx cypress run",
+    "openCypress": "npx cypress open",
+    "cypressChromeEdge": "npm run triggerAllTest -- --browser chrome & npm run triggerAllTest -- --browser edge",
+    "cypressFirefox": "npm run triggerAllTest -- --browser firefox --headed",
+    "deleteAllScreenshots": "rm -rf cypress/screenshots/*",
+    "runArticleViewing": "npx cypress run --spec cypress/e2e/bbc-article-viewing/*",
+    "runHomeNavigation": "npx cypress run --spec cypress/e2e/bbc-home-navigation/*",
+    "runRegistrationPage": "npx cypress run --spec cypress/e2e/bbc-registration-page/*",
+    "runResponsiveDesign": "npx cypress run --spec cypress/e2e/bbc-responsive-design/*",
+    "runSearchFunctionality": "npx cypress run --spec cypress/e2e/bbc-search-functionality/*",
+    "runVideoPlayer": "npx cypress run --spec cypress/e2e/bbc-video-player/*",
+    "runLanguageSelection": "npx cypress run --spec cypress/e2e/language-selection/*",
+    "runSubscriptionService": "npx cypress run --spec cypress/e2e/subscription-service/*",
+    "mergeMochawesome": "npx mochawesome-merge cypress/mochawesome/*.json > mochawesome.json && npx marge mochawesome.json --cdn",
+    "deleteMochawesomeJson": "rm -rf cypress/mochawesome/* || true",
+    "deleteMochawesomeReports": "rm -rf mochawesome-report/* || true",
+    "cypressRegressionPack": "npm run deleteMochawesomeJson && npm run deleteMochawesomeReports && npm run triggerAllTest || true && npm run mergeMochawesome"
+  },
+  "author": "Kristijonas",
+  "license": "ISC",
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "cypress": "^13.8.1",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-real-events": "^1.12.0",
+    "dotenv": "^16.4.5",
+    "npx": "^3.0.0"
+  },
+  "devDependencies": {
+    "cypress-multi-reporters": "^1.6.4",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0"
+  }
+}
