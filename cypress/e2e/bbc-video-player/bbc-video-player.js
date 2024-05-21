@@ -98,7 +98,7 @@ describe("Verify video fuctionality", () => {
     );
   });
 
-  it.only("Verify that video response to turn off subtitles/turn on subtitles", () => {
+  it("Verify that video response to turn off subtitles/turn on subtitles", () => {
     cy.get(bbcVideoLocators.SUBTITLES_BUTTON, {
       includeShadowDom: true,
     })
