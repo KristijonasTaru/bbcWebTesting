@@ -25,7 +25,7 @@ describe("Verify video fuctionality", () => {
   });
 
   it("Verify that video 10 seconds forward and backward buttons work correctly", () => {
-    cy.wait(2000);
+    cy.wait(1000);
     cy.get(bbcVideoLocators.TIME_CURRENT, { includeShadowDom: true })
       .shadow()
       .find(bbcVideoLocators.TIME_TEXT, { includeShadowDom: true })
@@ -34,12 +34,15 @@ describe("Verify video fuctionality", () => {
         VideoPlayerFunctions.clickVideoButton(
           bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON
         );
+        cy.wait(1000)
         VideoPlayerFunctions.clickVideoButton(
           bbcVideoLocators.FORWARD_TEN_SECOND_BUTTON
         );
+        cy.wait(1000)
         VideoPlayerFunctions.clickVideoButton(
           bbcVideoLocators.BACK_TEN_SECOND_BUTTON
         );
+        cy.wait(1000)
         cy.get(bbcVideoLocators.TIME_CURRENT, { includeShadowDom: true })
           .shadow()
           .find(bbcVideoLocators.TIME_TEXT, { includeShadowDom: true })
