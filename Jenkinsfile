@@ -41,10 +41,10 @@ pipeline {
                 // Corrected cp command with quotes around the destination directory
                 sh 'cp -r mochawesome-report/mochawesome.html "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
 
-                // Artifact - specify the path to the HTML report to archive
+                // Artifact - files that is for saving for jenkins
                 // Before run disabel CSP in jenkins - 
                 // System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
-                archiveArtifacts artifacts: 'mochawesome-report/**', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'mochawesome-report/**, cypress/screenshots/**', allowEmptyArchive: true
 
                 // Publish HTML report
                 publishHTML target: [
