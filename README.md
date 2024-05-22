@@ -49,7 +49,6 @@ There is many different ways to run test:
 ```
 npx cypress open
 ``` 
-
      This will allowing you to select and run test cases.
 2. In console write: 
 ```
@@ -62,6 +61,13 @@ npm run cypressChromeEdge
 ```
     This command allowing to run all tests on Chrome and Edge browsers
 
+
+## Jenkins
+
+Project setup with Jenkins pipeline.
+Automation test runs automatically every morning at 08:30 if jenkins running.
+--
+For better log view in Jenkins ansiColor plugin installed. For html mochawesome reports CSP loosen. 
 
 
 ## Feedback
