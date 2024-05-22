@@ -49,6 +49,7 @@ There is many different ways to run test:
 ```
 npx cypress open
 ``` 
+
      This will allowing you to select and run test cases.
 2. In console write: 
 ```
