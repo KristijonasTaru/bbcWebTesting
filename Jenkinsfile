@@ -14,16 +14,16 @@ pipeline {
             steps {
                 script {
                     // Install and update NPM packages
-                    bat 'npm install'
-                    bat 'npm update'
+                    sh 'npm install'
+                    sh 'npm update'
 
                     // Delete old reports and screenshots
-                    bat 'npm run deleteAllScreenshots'
-                    bat 'npm run deleteMochawesomeReports'
-                    bat 'npm run deleteMochawesomeJson'
+                    sh 'npm run deleteAllScreenshots'
+                    sh 'npm run deleteMochawesomeReports'
+                    sh 'npm run deleteMochawesomeJson'
 
                     // Run all Cypress tests, || true to keep pipeline running even after fail
-                    bat 'npm run triggerAllTest || true'
+                    sh 'npm run triggerAllTest || true'
 
                     // ansiColor for console to have readable file in Jenkins
                     echo '\033[34mHello\033[0m \033[33mcolorful\033[0m \033[35mworld!\033[0m'
@@ -36,10 +36,10 @@ pipeline {
         always {
             script {
                 // Create mochawesome report
-                bat 'npm run mergeMochawesome'
+                sh 'npm run mergeMochawesome'
 
                 // Corrected cp command with quotes around the destination directory
-                bat 'cp -r mochawesome-report/mochawesome.html "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
+                sh 'cp -r mochawesome-report/mochawesome.html "C:\\Users\\krtarut\\.jenkins\\workspace\\BBC Web Automation Testing"'
 
                 // Artifact - files that is for saving for jenkins
                 // Before run disabel CSP in jenkins - 
