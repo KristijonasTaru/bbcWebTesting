@@ -16,6 +16,7 @@ pipeline {
                     // Install and update NPM packages
                     bat 'npm install'
                     bat 'npm update'
+                    bat 'npm install --save-dev rimraf mkdirp'
 
                     // Delete old reports and screenshots
                     bat 'npm run deleteAllScreenshots'
